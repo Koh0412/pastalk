@@ -13,3 +13,21 @@
  *= require_tree .
  *= require_self
  */
+
+.bg-purple {
+    background: #7c6294;
+}
+
+.navbar-toggler {
+    border: none;
+    border-radius: 100%;
+    padding: .35rem .35rem;
+}
+
+.navbar-toggler:hover {
+    /*background: rgba(255,255,255,.1);*/
+}
+
+.navbar-toggler:focus {
+    outline: none;
+}
