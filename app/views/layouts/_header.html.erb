@@ -1,5 +1,5 @@
-<header class="mb-4">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-purple">
+<header class="mb-4 sticky header-opacity">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-purple px-3">
         <a class="navbar-brand" href="/">Pastalk</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
@@ -7,8 +7,14 @@
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item mr-1"><a href="#" class="nav-link">新規登録</a></li>
-                <li class="nav-item mr-1"><a href="#" class="nav-link">ログイン</a></li>
+                <% if logged_in? %>
+                    <li class="nav-item mr-1"><%= link_to 'ユーザー', '#', class: 'nav-link' %></li>
+                    <li class="nav-item mr-1"><%= link_to 'ログアウト', logout_path, method: :delete, data: { confirm: 'ログアウトしますか？' }, class: 'nav-link' %></li>
+                    <li class="nav-item mr-1"><a class="nav-link" href="#"><%= fa_icon 'cog' %></a></li>
+                <% else %>
+                    <li class="nav-item mr-1"><%= link_to '新規登録', signup_path, class: 'nav-link' %></li>
+                    <li class="nav-item mr-1"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>
+                <% end %>
             </ul>
         </div>
     </nav>

@@ -1,0 +1,27 @@
+<div>
+    <h2 class="text-center text-purple py-3 border-bottom">プロフィールの編集</h2>
+    <a href="<%= user_path(@user)%>" class="text-purple"><%= fa_icon 'arrow-left ' %>戻る</a>
+</div>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <%= form_with(model: @user, local: true, class: 'py-3') do |f| %>
+            <div class="form-group">
+                <%= f.label :name, '名前' %>
+                <%= f.text_field :name, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+                <div class="py-2">イメージ画像</div>
+                <div>
+                    <img class="mr-2 rounded-circle" src="<%= gravatar_url(@user, { size: 60 }) %>" alt="">
+                    <span>画像の設定は<%= link_to 'gravatar', 'https://ko.gravatar.com', class: 'border-bottom px-1 text-info' %>の方でお願いします</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <%= f.label :comment, 'コメント' %>
+                <%= f.text_area :comment, class: 'form-control' %>
+            </div>
+            <%= f.submit '更新', class: 'button button-purple btn-block' %>
+        <% end %>
+    </div>
+</div>
