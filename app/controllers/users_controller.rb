@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-    before_action :require_user_logged_in
+    before_action :require_user_logged_in, only: [:index, :show, :edit, :update, :destroy]
+    before_action :login_user, only: [:new, :create]
+    before_action :correct_user, only: [:edit]
     before_action :set_user, only: [:show, :edit, :update, :destroy]
     
     def index
@@ -7,6 +9,8 @@ class UsersController < ApplicationController
     end
     
     def show
+        @tag = current_user.tags.build
+        @tags = @user.tags.order(id: :desc)
     end
     
     def new
@@ -49,6 +53,13 @@ class UsersController < ApplicationController
     
     def set_user
         @user = User.find(params[:id])
+    end
+    
+    def correct_user
+        set_user
+        unless @user == current_user
+            redirect_back(fallback_location: root_path)
+        end
     end
     
     def user_params

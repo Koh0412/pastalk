@@ -26,6 +26,10 @@ a:hover {
     text-decoration: none;
 }
 
+header {
+    box-shadow: 0 0 4px 2px rgba(0,0,0,.2);
+}
+
 /* class etc */
 
 .profile {
@@ -71,6 +75,20 @@ a:hover {
     transition: .3s ease-in-out;
     -webkit-transition: .3s ease-in-out;
     -moz-transition: .3s ease-in-out;
+}
+
+.button-red {
+    background: #e21a1a;
+    color: white;
+}
+
+.button-red:hover {
+    color: white;
+    background: #c31111;
+    transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    
 }
 
 .button-border-purple {
@@ -165,8 +183,16 @@ a:hover {
 /*    background: rgba(255,255,255,.1);*/
 /*}*/
 
+input, textarea {
+    box-shadow: inset 0 1px 2px rgba(27,31,35,.075);
+}
+
 .mb-6 {
     margin-bottom: 4rem;
+}
+
+.w-15 {
+    width: 15%;
 }
 
 .navbar-toggler {
@@ -195,4 +221,22 @@ textarea.form-control {
     resize: none;
     overflow-y: auto;
     height: 150px;
+}
+
+.dropdown-menu, .dropdown-item {
+    padding: 0;
+}
+
+.dropdown-menu {
+    box-shadow: 0 0 4px 1px rgba(0,0,0,.1);
+}
+
+.dropdown-item a {
+    text-align: center;
+    display: block;
+    padding: .5rem 1.3rem;
+}
+
+.dropdown-item a:active {
+    background: #eee;
 }

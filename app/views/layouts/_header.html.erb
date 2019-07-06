@@ -8,9 +8,57 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <% if logged_in? %>
-                    <li class="nav-item mr-1"><%= link_to 'ユーザー', '#', class: 'nav-link' %></li>
-                    <li class="nav-item mr-1"><%= link_to 'ログアウト', logout_path, method: :delete, data: { confirm: 'ログアウトしますか？' }, class: 'nav-link' %></li>
-                    <li class="nav-item mr-1"><a class="nav-link" href="#"><%= fa_icon 'cog' %></a></li>
+                    <li class="nav-item dropdown mr-1">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ユーザー</a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item border-bottom">
+                                <a href="/users">
+                                    <span>フォロー</span>
+                                    <span><%= fa_icon 'user-friends' %></span>
+                                </a>
+                            </li>
+                            <li class="dropdown-item border-bottom">
+                                <a href="#">
+                                    <span>ユーザーの検索</span>
+                                    <span><%= fa_icon 'search' %></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mr-1">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">グループ</a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item border-bottom">
+                                <a href="#">
+                                    <span>グループの検索</span>
+                                    <span><%= fa_icon 'search' %></span>
+                                </a>
+                            </li>
+                            <li class="dropdown-item border-bottom">
+                                <a href="#">
+                                    <span>作成</span>
+                                    <span><%= fa_icon 'comments' %></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mr-1">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item border-bottom">
+                                <a href="<%= user_path(current_user) %>">
+                                    <span>マイプロフィール</span>
+                                    <span><%= fa_icon 'user-circle' %></span>
+                                </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a data-confirm="ログアウトしますか？" data-method="delete" rel="nofollow" href="/logout">
+                                    <span>ログアウト</span>
+                                    <span><%= fa_icon 'sign-out-alt' %></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 <% else %>
                     <li class="nav-item mr-1"><%= link_to '新規登録', signup_path, class: 'nav-link' %></li>
                     <li class="nav-item mr-1"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>

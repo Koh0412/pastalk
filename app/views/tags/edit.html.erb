@@ -1,0 +1,17 @@
+<h2 class="text-center text-purple border-bottom p-2">タグの編集</h2>
+
+<a href="<%= user_path(@tag.user)%>" class="text-purple"><%= fa_icon 'arrow-left ' %>戻る</a>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2 pt-3">
+        <%= form_with(model: @tag, local: true) do |f| %>
+        <%= render 'layouts/error_msg', model: f.object %>
+            <%= f.label :name, 'タグ' %>
+            <%= f.text_field :name, class: 'form-control' %>
+            
+            <%= f.submit '更新', class: 'button button-purple my-5 w-75' %>
+            <%= link_to '削除', tag_path(@tag), method: :delete, data: { confirm: 'タグをしますか？' },
+             class: 'button button-red d-inline-block px-4 text-center' %>
+        <% end %>
+    </div>
+</div>

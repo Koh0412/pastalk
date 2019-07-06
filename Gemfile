@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'kaminari'
 # use font-awesome
 gem 'font-awesome-rails'
+# use jquery
+gem 'jquery-rails'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
