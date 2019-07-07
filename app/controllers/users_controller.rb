@@ -1,15 +1,14 @@
 class UsersController < ApplicationController
     before_action :require_user_logged_in, only: [:index, :show, :edit, :update, :destroy]
     before_action :login_user, only: [:new, :create]
-    before_action :correct_user, only: [:edit]
-    before_action :set_user, only: [:show, :edit, :update, :destroy]
+    before_action :correct_user, only: [:edit, :update, :destroy, :followings]
+    before_action :set_user, only: [:show]
     
     def index
         @users = User.order(id: :desc).page(params[:page])
     end
     
     def show
-        @tag = current_user.tags.build
         @tags = @user.tags.order(id: :desc)
     end
     
@@ -47,6 +46,18 @@ class UsersController < ApplicationController
         
         flash[:success] = "アカウントが削除されました"
         redirect_to root_url
+    end
+    
+    def search
+        @users = if params[:search]
+            User.user_search(params[:search]).page(params[:page]).per(20)
+        else
+            User.user_search(params[:search])
+        end
+    end
+    
+    def followings
+        @followings = @user.followings.page(params[:page])
     end
     
     private

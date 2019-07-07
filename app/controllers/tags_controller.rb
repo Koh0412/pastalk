@@ -18,7 +18,7 @@ class TagsController < ApplicationController
       redirect_to user_path(current_user)
     else
       flash[:danger] = "タグのセットは行っていません"
-      render :index
+      redirect_back(fallback_location: root_path)
     end
   end
   
@@ -28,7 +28,7 @@ class TagsController < ApplicationController
       redirect_to @tag.user
     else
       flash[:danger] = "タグの更新に失敗しました"
-      render :edit
+      redirect_back(fallback_location: root_path)
     end
   end
 

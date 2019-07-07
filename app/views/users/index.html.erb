@@ -1,20 +1,3 @@
-<h2 class="text-center bold p-4 border-bottom-bold text-purple">フォローユーザー</h2>
-<% if @users.any? %>
-    <ul class="list-unstyled">
-        <% @users.each do |user| %>
-        <a href="<%= user_path(user) %>">
-            <li class="media border-bottom user-list py-2">
-                <img class="mr-2 rounded-circle" src="<%= gravatar_url(user, { size: 50 }) %>" alt="">
-                <div class="media-body">
-                    <div>
-                        <%= user.name %>
-                    </div>
-                    <div class="comment-color">
-                        <%= user.comment %>
-                    </div>
-                </div>
-            </li>
-        </a>
-        <% end %>
-    </ul>
-<% end %>
+<h2 class="text-center bold p-4 border-bottom-bold text-purple">全ユーザー(管理者用)</h2>
+
+<%= render 'users', users: @users %>

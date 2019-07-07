@@ -12,13 +12,13 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">ユーザー</a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li class="dropdown-item border-bottom">
-                                <a href="/users">
+                                <a href="<%= followings_user_path(current_user) %>">
                                     <span>フォロー</span>
                                     <span><%= fa_icon 'user-friends' %></span>
                                 </a>
                             </li>
                             <li class="dropdown-item border-bottom">
-                                <a href="#">
+                                <a href="/users/search">
                                     <span>ユーザーの検索</span>
                                     <span><%= fa_icon 'search' %></span>
                                 </a>

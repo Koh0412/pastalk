@@ -1,0 +1,43 @@
+<h2 class="text-center text-purple border-bottom py-3">ユーザーの検索</h2>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <%= form_tag(search_users_path, method: :get, class: 'd-flex justify-content-center') do %>
+            <div class="input-group">
+                <%= text_field_tag :search, '', class: 'form-control not-rounded rounded-left', placeholder: 'ユーザー名を検索...' %>
+                <span class="input-group-btn">
+                    <%= submit_tag '検索', name: nil, class: 'btn btn-success not-rounded rounded-right' %>
+                </span>
+            </div>
+        <% end %>
+        <% if @users.blank? %>
+            <p class="border-top mt-2 pt-2 text-center comment-color">現在検索中のユーザーはいません 検索してみましょう</p>
+        <% else %>
+            <ul class="p-2 my-2 border rounded">
+                <% if @users.present? %>
+                  <% @users.each do |user| %>
+                    <a href="<%= user_path(user) %>">
+                        <li class="media border-bottom user-list py-2">
+                            <img class="mr-2 rounded-circle" src="<%= gravatar_url(user, { size: 50 }) %>" alt="">
+                            <div class="media-body">
+                                <div>
+                                    <%= user.name %>
+                                </div>
+                                <div class="comment-color">
+                                    <%= user.comment %>
+                                </div>
+                                <div>
+                                    <% user.tags.each do |tag| %>
+                                        <span class="text-info mr-1">@<%= tag.name %></span>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </li>
+                    </a>
+                  <% end %>
+                <% end %>
+            </ul>
+            <%= paginate @users %>
+        <% end %>
+    </div>
+</div>

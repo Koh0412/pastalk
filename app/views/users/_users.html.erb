@@ -1,0 +1,20 @@
+<% if users.any? %>
+    <ul class="list-unstyled">
+        <% users.each do |user| %>
+            <a href="<%= user_path(user) %>">
+                <li class="media border-bottom user-list py-2">
+                    <img class="mr-2 rounded-circle" src="<%= gravatar_url(user, { size: 50 }) %>" alt="">
+                    <div class="media-body">
+                        <div>
+                            <%= user.name %>
+                        </div>
+                        <div class="comment-color">
+                            <%= user.comment %>
+                        </div>
+                    </div>
+                </li>
+            </a>
+        <% end %>
+    </ul>
+    <%= paginate users %>
+<% end %>
