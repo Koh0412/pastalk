@@ -65,6 +65,10 @@ ul {
     border-radius: 0;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 /* button */
 
 .button {

@@ -2,11 +2,11 @@
 
 <div class="row">
     <div class="col-md-8 offset-md-2">
-        <%= form_tag(search_users_path, method: :get, class: 'd-flex justify-content-center') do %>
+        <%= form_with(url: search_users_path, method: :get, class: 'd-flex justify-content-center', local: true) do |f| %>
             <div class="input-group">
-                <%= text_field_tag :search, '', class: 'form-control not-rounded rounded-left', placeholder: 'ユーザー名を検索...' %>
+                <%= f.text_field :search, class: 'form-control not-rounded rounded-left', placeholder: 'ユーザー名を検索...' %>
                 <span class="input-group-btn">
-                    <%= submit_tag '検索', name: nil, class: 'btn btn-success not-rounded rounded-right' %>
+                    <%= f.submit '検索', name: nil, class: 'btn btn-success not-rounded rounded-right' %>
                 </span>
             </div>
         <% end %>

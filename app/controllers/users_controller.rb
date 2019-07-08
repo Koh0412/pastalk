@@ -49,7 +49,7 @@ class UsersController < ApplicationController
     end
     
     def search
-        @users = if params[:search]
+        @users = if !params[:search].blank?
             User.user_search(params[:search]).page(params[:page]).per(20)
         else
             User.user_search(params[:search])

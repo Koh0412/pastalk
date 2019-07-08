@@ -20,11 +20,12 @@
 
   <body>
     <%= render 'layouts/header' %>
-    
-    <div class="container">
-      
-      <%= render 'layouts/flash_msg' %>
-      <%= yield %>
+    <div class="load pt-4" id="load">
+      <div class="container">
+        
+        <%= render 'layouts/flash_msg' %>
+        <%= yield %>
+      </div>
     </div>
     <% unless logged_in? %>
       <%= render 'layouts/footer' %>
