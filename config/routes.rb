@@ -25,4 +25,10 @@ Rails.application.routes.draw do
   end
   
   resources :relationships, only: [:create, :destroy]
+  
+  resources :groups do
+    collection do
+      get :search
+    end
+  end
 end

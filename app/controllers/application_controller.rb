@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     
     def login_user
         if logged_in?
-            redirect_to users_url
+            redirect_to groups_url
         end
     end
 end

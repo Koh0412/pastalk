@@ -1,0 +1,38 @@
+<div class="group-chat-border position-relative">
+    <nav class="navbar navbar-expand-sm group-chat-header-color d-flex justify-content-between group-sticky">
+        <span>
+            <a href="/groups"><%= fa_icon 'arrow-left' %></a>
+            <span class="ml-3"><%= @group.name %></span>
+        </span>
+        <span>
+            <span class="mr-3">user count</span>
+            <span class="pr-3 dropdown">
+                <a href="#" data-toggle="dropdown">設定</a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li class="dropdown-item border-bottom">
+                        <% if @group.user == current_user %>
+                            <%= link_to 'グループ設定', edit_group_path(@group) %>
+                        <% end %>
+                    </li>
+                    <li class="dropdown-item border-bottom">
+                        <%= link_to 'ユーザー', '#' %>
+                    </li>
+                    <li class="dropdown-item border-bottom">
+                        <%= link_to 'その他', '#' %>
+                    </li>
+                    <li class="dropdown-item">
+                        <%= link_to 'グループの削除', @group, method: :delete, data: { confirm: 'グループを削除しますか？' } %>
+                    </li>
+                </ul>
+            </span>
+        </span>
+    </nav>
+    <div class="chat-body">
+        <% @users.each do |user| %>
+            <div><%= user.name %></div>
+        <% end %>
+    </div>
+    <div class="py-2 bg-dark text-white">
+        メッセージフォーム＆ボタン実装ゾーン
+    </div>
+</div>
