@@ -1,0 +1,4 @@
+<h2 class="text-center text-purple border-bottom py-2">メンバー一覧</h2>
+<a href="<%= group_path(@group)%>" class="text-purple"><%= fa_icon 'arrow-left ' %>戻る</a>
+
+<%= render 'users/users', users: @users  %>

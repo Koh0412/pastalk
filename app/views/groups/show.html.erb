@@ -5,7 +5,7 @@
             <span class="ml-3"><%= @group.name %></span>
         </span>
         <span>
-            <span class="mr-3">user count</span>
+            <span class="mr-3 px-1">メンバー <span class="badge badge-info"><%= @count_connected %></span></span>
             <span class="pr-3 dropdown">
                 <a href="#" data-toggle="dropdown">設定</a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -15,14 +15,16 @@
                         <% end %>
                     </li>
                     <li class="dropdown-item border-bottom">
-                        <%= link_to 'ユーザー', '#' %>
+                        <%= link_to 'メンバー', connect_group_path(@group) %>
                     </li>
                     <li class="dropdown-item border-bottom">
                         <%= link_to 'その他', '#' %>
                     </li>
-                    <li class="dropdown-item">
-                        <%= link_to 'グループの削除', @group, method: :delete, data: { confirm: 'グループを削除しますか？' } %>
-                    </li>
+                    <% if @group.user == current_user %>
+                        <li class="dropdown-item">
+                            <%= link_to 'グループの削除', @group, method: :delete, data: { confirm: 'グループを削除しますか？' } %>
+                        </li>
+                    <% end %>
                 </ul>
             </span>
         </span>

@@ -1,0 +1,17 @@
+<h2 class="text-center text-purple border-bottom py-2">グループ詳細</h2>
+<div class="row my-4">
+    <span class="col-md-2 bold py-2">グループ名:</span>
+    <span class="col-md-9 rounded bg-light py-2 border"><%= @group.name %></span>
+</div>
+<div class="row my-4">
+    <span class="col-md-2 bold py-2">紹介:</span>
+    <span class="col-md-9 rounded bg-light py-2 border profile"><%= @group.content %></span>
+</div>
+<div class="row my-4">
+    <span class="col-md-2 bold py-2">メンバー数:</span>
+    <span class="col-md-9 rounded bg-light py-2 border"><%= @count_connected %>人</span>
+</div>
+<div class="row my-4">
+    <span class="col-md-2 bold py-2"></span>
+    <span class="col-md-9 py-2"><%= render 'connects/member_btn', group: @group %></span>
+</div>

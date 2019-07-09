@@ -15,26 +15,7 @@
         <% else %>
             <ul class="p-2 my-2 border rounded">
                 <% if @users.present? %>
-                  <% @users.each do |user| %>
-                    <a href="<%= user_path(user) %>">
-                        <li class="media border-bottom user-list py-2">
-                            <img class="mr-2 rounded-circle" src="<%= gravatar_url(user, { size: 50 }) %>" alt="">
-                            <div class="media-body">
-                                <div>
-                                    <%= user.name %>
-                                </div>
-                                <div class="comment-color">
-                                    <%= user.comment %>
-                                </div>
-                                <div>
-                                    <% user.tags.each do |tag| %>
-                                        <span class="text-info mr-1">@<%= tag.name %></span>
-                                    <% end %>
-                                </div>
-                            </div>
-                        </li>
-                    </a>
-                  <% end %>
+                    <%= render 'search' %>
                 <% end %>
             </ul>
             <%= paginate @users %>

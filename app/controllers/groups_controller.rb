@@ -1,14 +1,19 @@
 class GroupsController < ApplicationController
-    before_action :correct_user_group, only: [:edit, :update, :destroy]
-    before_action :set_group, only: [:show]
+    before_action :require_user_logged_in
+    before_action :host_user, only: [:edit, :update, :destroy]
+    before_action :set_group, only: [:show, :connect, :details]
     
     def index
     #   @users = User.all.page(params[:page])
-        @groups = Group.order(id: :desc).page(params[:page])
+        @groups = current_user.connectings.page(params[:page])
     end
     
     def show
+        if !current_user.connecting?(@group)
+            redirect_back(fallback_location: groups_url)
+        end
         @users = User.all
+        group_counts(@group)
     end
     
     def new
@@ -19,8 +24,9 @@ class GroupsController < ApplicationController
         @group = current_user.groups.build(group_params)
         
         if @group.save
+            @group.user.have_connect(@group)
             flash[:success] = "グループが作成されました"
-            redirect_to groups_path
+            redirect_to groups_url
         else
             flash.now[:danger] = "グループの作成ができませんでした"
             render :new
@@ -44,11 +50,27 @@ class GroupsController < ApplicationController
         @group.destroy
         flash[:success] = "グループが削除されました"
         
-        redirect_to groups_path
+        redirect_to groups_url
     end
     
     def search
+        @groups = if !params[:search].blank?
+            Group.group_search(params[:search]).page(params[:page]).per(30)
+        else
+            Group.group_search(params[:search])
+        end
+    end
+    
+    def connect
+        @users = @group.connected.page(params[:page])
         
+        if !current_user.connecting?(@group)
+            redirect_back(fallback_location: groups_url)
+        end
+    end
+    
+    def details
+        group_counts(@group)
     end
     
     private
@@ -61,11 +83,11 @@ class GroupsController < ApplicationController
         @group = Group.find(params[:id])
     end
     
-    def correct_user_group
+    def host_user
         @group = current_user.groups.find_by(id: params[:id])
         
         unless @group
-            redirect_back(fallback_location: groups_path)
+            redirect_back(fallback_location: groups_url)
         end
     end
     

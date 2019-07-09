@@ -1,0 +1,34 @@
+<% @groups.each do |group| %>
+    <% if current_user.connecting?(group) %>
+        <a href="<%= group_path(group) %>">
+            <li class="border-bold group-border-color rounded my-3">
+                <div class="group-header p-2 d-flex justify-content-between align-items-center">
+                    <span>
+                        <span>グループ名: <%= group.name %></span>
+                        <span class="ml-2">ホスト: <%= group.user.name %></span>
+                    </span>
+                    <span class="badge badge-primary py-1">メンバー</span>
+                </div>
+                <div class="group-content p-2">
+                    <div class="px-2">グループ紹介: </div>
+                    <div class="comment-color px-2"><%= group.content %></div>
+                </div>
+            </li>
+        </a>
+    <% else %>
+        <a href="<%= details_group_path(group) %>">
+            <li class="border-bold group-border-color rounded my-3">
+                <div class="group-header p-2">
+                    <span>
+                        <span>グループ名: <%= group.name %></span>
+                        <span class="ml-2">ホスト: <%= group.user.name %></span>
+                    </span>
+                </div>
+                <div class="group-content p-2">
+                    <div class="px-2">グループ紹介: </div>
+                    <div class="comment-color px-2"><%= group.content %></div>
+                </div>
+            </li>
+        </a>
+    <% end %>
+<% end %>

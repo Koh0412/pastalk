@@ -1,0 +1,24 @@
+<h2 class="text-center text-purple border-bottom py-3">グループの検索</h2>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <%= form_with(url: search_groups_path, method: :get, class: 'd-flex justify-content-center', local: true) do |f| %>
+            <div class="input-group">
+                <%= f.text_field :search, class: 'form-control not-rounded rounded-left', placeholder: 'グループ名を検索...' %>
+                <span class="input-group-btn">
+                    <%= f.submit '検索', name: nil, class: 'btn btn-success not-rounded rounded-right' %>
+                </span>
+            </div>
+        <% end %>
+         <% if @groups.blank? %>
+            <p class="border-top mt-2 pt-2 text-center comment-color">現在検索中のグループはありません 検索してみましょう</p>
+        <% else %>
+            <ul>
+                <% if @groups.present? %>
+                    <%= render 'search' %>
+                <% end %>
+            </ul>
+            <%= paginate @groups %>
+        <% end %>
+    </div>
+</div>
