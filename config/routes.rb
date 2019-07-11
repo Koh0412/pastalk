@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     member do
       get :connect
       get :details
+      resources :groupmessages, only: [:create, :destroy]
     end
   end
   

@@ -7,7 +7,11 @@
                         <span>グループ名: <%= group.name %></span>
                         <span class="ml-2">ホスト: <%= group.user.name %></span>
                     </span>
-                    <span class="badge badge-primary py-1">メンバー</span>
+                    <% if group.user == current_user %>
+                        <span class="badge badge-danger py-1">ホスト</span>
+                    <% else %>
+                        <span class="badge badge-primary py-1">メンバー</span>
+                    <% end %>
                 </div>
                 <div class="group-content p-2">
                     <div class="px-2">グループ紹介: </div>

@@ -12,7 +12,7 @@ class GroupsController < ApplicationController
         if !current_user.connecting?(@group)
             redirect_back(fallback_location: groups_url)
         end
-        @users = User.all
+        @group_message = current_user.groupmessages.build
         group_counts(@group)
     end
     

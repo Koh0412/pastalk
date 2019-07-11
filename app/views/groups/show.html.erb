@@ -1,5 +1,5 @@
 <div class="group-chat-border position-relative">
-    <nav class="navbar navbar-expand-sm group-chat-header-color d-flex justify-content-between group-sticky">
+    <nav class="navbar navbar-expand-sm group-chat-header-color d-flex justify-content-between">
         <span>
             <a href="/groups"><%= fa_icon 'arrow-left' %></a>
             <span class="ml-3"><%= @group.name %></span>
@@ -17,24 +17,37 @@
                     <li class="dropdown-item border-bottom">
                         <%= link_to 'メンバー', connect_group_path(@group) %>
                     </li>
-                    <li class="dropdown-item border-bottom">
-                        <%= link_to 'その他', '#' %>
-                    </li>
                     <% if @group.user == current_user %>
                         <li class="dropdown-item">
                             <%= link_to 'グループの削除', @group, method: :delete, data: { confirm: 'グループを削除しますか？' } %>
+                        </li>
+                    <% else %>
+                        <li class="dropdown-item border-bottom">
+                            <%= link_to '退会', connect_path(@group), method: :delete, data: { confirm: 'グループを退会しますか？' } %>
                         </li>
                     <% end %>
                 </ul>
             </span>
         </span>
     </nav>
-    <div class="chat-body">
-        <% @users.each do |user| %>
-            <div><%= user.name %></div>
+    <div class="chat-body px-1 py-2">
+        <% @group.groupmessages.each do |msg| %>
+            <% if msg.user == current_user %>
+                <div class="d-flex justify-content-end align-items-end pr-1 mt-2">
+                    <div class="comment-color pr-1"><%= msg.created_at.strftime("%H:%M ") %></div>
+                    <div class="current-user-chat text-right"><%= msg.body %></div>
+                </div>
+            <% else %>
+                <div class="py-1 pl-1"><%= msg.user.name %></div>
+                <div class="d-flex align-items-end pl-1">
+                    <div class="user-chat text-left"><%= msg.body %></div>
+                    <div class="comment-color pl-1"><%= msg.created_at.strftime("%H:%M ") %></div>
+                </div>
+            <% end %>
         <% end %>
     </div>
-    <div class="py-2 bg-dark text-white">
-        メッセージフォーム＆ボタン実装ゾーン
+    <div id="flash_messages"></div>
+    <div>
+        <%= render 'groupmessages/groupmsg_form', group: @group %>
     </div>
 </div>

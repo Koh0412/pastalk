@@ -11,7 +11,9 @@
             </div>
         <% end %>
          <% if @groups.blank? %>
-            <p class="border-top mt-2 pt-2 text-center comment-color">現在検索中のグループはありません 検索してみましょう</p>
+            <p class="border-top mt-2 pt-2 text-center comment-color">
+                現在検索中のグループはありません 検索してみましょう(testと調べてもらうとテスト部屋があります)
+            </p>
         <% else %>
             <ul>
                 <% if @groups.present? %>

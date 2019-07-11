@@ -13,6 +13,9 @@ class User < ApplicationRecord
     has_many :connectings, through: :connects, source: :group
     has_many :groups
     
+    has_many :groupmessages
+    has_many :user_messages, through: :groupmessages, source: :group
+    
     has_many :relationships, dependent: :destroy
     has_many :followings, through: :relationships, source: :follow
     has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
@@ -52,5 +55,10 @@ class User < ApplicationRecord
     
     def connecting?(group)
         self.connectings.include?(group)
+    end
+    
+    
+    def send_groupmessage(group)
+        self.groupmessages.find_or_create_by(group_id: group.id)
     end
 end

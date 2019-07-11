@@ -7,7 +7,7 @@ class ConnectsController < ApplicationController
   end
 
   def destroy
-    group = Group.find(params[:group_id])
+    group = Group.find(params[:id])
     current_user.delete_connect(group)
     flash[:success] = "グループを退会しました"
     redirect_to groups_url

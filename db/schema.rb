@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_09_142057) do
+ActiveRecord::Schema.define(version: 2019_07_10_150211) do
 
   create_table "connects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 2019_07_09_142057) do
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_connects_on_group_id"
     t.index ["user_id"], name: "index_connects_on_user_id"
+  end
+
+  create_table "groupmessages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "body"
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_groupmessages_on_group_id"
+    t.index ["user_id"], name: "index_groupmessages_on_user_id"
   end
 
   create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -59,6 +69,8 @@ ActiveRecord::Schema.define(version: 2019_07_09_142057) do
 
   add_foreign_key "connects", "groups"
   add_foreign_key "connects", "users"
+  add_foreign_key "groupmessages", "groups"
+  add_foreign_key "groupmessages", "users"
   add_foreign_key "groups", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"

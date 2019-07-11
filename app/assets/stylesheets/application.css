@@ -91,6 +91,20 @@ ul {
     cursor: pointer;
 }
 
+.current-user-chat, .user-chat {
+    max-width: 90%;
+    padding: 5px 8px;
+    border-radius: 5px;
+}
+
+.current-user-chat {
+    background: #c7f5cd;
+}
+
+.user-chat {
+    background: #d9edff;
+}
+
 /* button */
 
 .button {

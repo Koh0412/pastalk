@@ -4,6 +4,8 @@ class Group < ApplicationRecord
   has_many :connects, dependent: :destroy
   has_many :connected, through: :connects, source: :user
   
+  has_many :groupmessages, dependent: :destroy
+  
   validates :name, presence: true, length: { maximum: 50 }
   validates :content, length: { maximum: 255 }
   
