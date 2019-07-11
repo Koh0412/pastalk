@@ -36,4 +36,5 @@ Rails.application.routes.draw do
   end
   
   resources :connects, only: [:create, :destroy]
+  
 end

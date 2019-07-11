@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_10_150211) do
+ActiveRecord::Schema.define(version: 2019_07_11_164457) do
 
   create_table "connects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -40,6 +40,27 @@ ActiveRecord::Schema.define(version: 2019_07_10_150211) do
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
+  create_table "memberships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "talk_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["talk_id"], name: "index_memberships_on_talk_id"
+    t.index ["user_id", "talk_id"], name: "index_memberships_on_user_id_and_talk_id", unique: true
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "content"
+    t.bigint "user_id"
+    t.bigint "talk_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["talk_id"], name: "index_messages_on_talk_id"
+    t.index ["updated_at", "talk_id"], name: "index_messages_on_updated_at_and_talk_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "follow_id"
@@ -58,6 +79,12 @@ ActiveRecord::Schema.define(version: 2019_07_10_150211) do
     t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
+  create_table "talks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["updated_at"], name: "index_talks_on_updated_at"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -72,6 +99,10 @@ ActiveRecord::Schema.define(version: 2019_07_10_150211) do
   add_foreign_key "groupmessages", "groups"
   add_foreign_key "groupmessages", "users"
   add_foreign_key "groups", "users"
+  add_foreign_key "memberships", "talks"
+  add_foreign_key "memberships", "users"
+  add_foreign_key "messages", "talks"
+  add_foreign_key "messages", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
   add_foreign_key "tags", "users"

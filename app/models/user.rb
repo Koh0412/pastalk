@@ -7,15 +7,17 @@ class User < ApplicationRecord
      uniqueness: { case_sensitive: false }
     validates :comment, length: { maximum: 150 } 
 
+    # タグ
     has_many :tags, dependent: :destroy
     
+    # グループトーク
     has_many :connects, dependent: :destroy
     has_many :connectings, through: :connects, source: :group
     has_many :groups
-    
     has_many :groupmessages
     has_many :user_messages, through: :groupmessages, source: :group
     
+    # フォロー
     has_many :relationships, dependent: :destroy
     has_many :followings, through: :relationships, source: :follow
     has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
@@ -23,12 +25,14 @@ class User < ApplicationRecord
     
     has_secure_password
     
+    # search
     def self.user_search(search)
         if !search.blank?
             User.where(['name LIKE ?', "%#{search}%"])
         end
     end
     
+    # follow
     def follow(other_user)
         unless self == other_user
             self.relationships.find_or_create_by(follow_id: other_user.id)
@@ -44,6 +48,7 @@ class User < ApplicationRecord
         self.followings.include?(other_user)
     end
     
+    # connect
     def have_connect(group)
         self.connects.find_or_create_by(group_id: group.id)
     end
@@ -55,10 +60,5 @@ class User < ApplicationRecord
     
     def connecting?(group)
         self.connectings.include?(group)
-    end
-    
-    
-    def send_groupmessage(group)
-        self.groupmessages.find_or_create_by(group_id: group.id)
     end
 end
