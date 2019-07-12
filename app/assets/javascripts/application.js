@@ -17,8 +17,3 @@
 //= require jquery_ujs
 //= require_tree .
 
-'use strict';
-
-$(() => {
-    $('[data-toggle="tooltip"]').tooltip();
-});
