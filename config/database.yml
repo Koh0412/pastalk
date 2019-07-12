@@ -48,7 +48,9 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: pastalk_production
   username: pastalk
   password: <%= ENV['PASTALK_DATABASE_PASSWORD'] %>
