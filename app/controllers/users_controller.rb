@@ -4,10 +4,6 @@ class UsersController < ApplicationController
     before_action :correct_user, only: [:edit, :update, :destroy, :followings]
     before_action :set_user, only: [:show]
     
-    def index
-        
-    end
-    
     def show
         @tags = @user.tags.order(id: :desc)
     end
