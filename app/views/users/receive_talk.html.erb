@@ -1,0 +1,24 @@
+<h2 class="text-center text-purple border-bottom py-2">受けとったメッセージ一覧</h2>
+<div class="d-flex justify-content-end">
+    <div><a href="<%= user_talk_users_path %>" class="text-purple"><%= fa_icon 'arrow-right ' %>送ったメッセージへ</a></div>
+</div>
+
+<% if @receive_meesages.nil? %>
+    <% @receive_messages.each do |message| %>
+        <ul>
+           <a href="<%= messages_path(message.user_id) %>">
+                <li class="media border-bottom user-list py-2">
+                    <img class="mr-2 rounded-circle" src="<%= gravatar_url(message.user, { size: 50 }) %>" alt="">
+                    <div class="media-body">
+                        <div>
+                            <%= message.user.name %>
+                        </div>
+                        <div class="comment-color">
+                            <%= message.content %>
+                        </div>
+                    </div>
+                </li>
+            </a>
+        </ul>
+    <% end %>
+<% end %>

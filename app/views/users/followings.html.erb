@@ -1,3 +1,6 @@
 <h2 class="text-center bold p-4 border-bottom-bold text-purple">フォロー</h2>
+<div class="d-flex justify-content-end">
+    <div><a href="<%= followers_user_path %>" class="text-purple"><%= fa_icon 'arrow-right ' %>フォロワーへ</a></div>
+</div>
 
 <%= render 'users', users: @followings %>

@@ -1,0 +1,4 @@
+<h2 class="text-center bold p-4 border-bottom-bold text-purple">フォロワー</h2>
+<a href="<%= followings_user_path %>" class="text-purple"><%= fa_icon 'arrow-left ' %>フォローへ</a>
+
+<%= render 'users', users: @followers %>

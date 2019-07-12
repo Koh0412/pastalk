@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
     before_action :require_user_logged_in, only: [:index, :show, :edit, :update, :destroy]
     before_action :login_user, only: [:new, :create]
-    before_action :correct_user, only: [:edit, :update, :destroy, :followings]
+    before_action :correct_user, only: [:edit, :update, :destroy, :followings, :followers]
     before_action :set_user, only: [:show]
+    
+    def index
+        @users = User.order(id: :desc).page(params[:page])
+    end
     
     def show
         @tags = @user.tags.order(id: :desc)
@@ -56,11 +60,19 @@ class UsersController < ApplicationController
         @followings = @user.followings.page(params[:page])
     end
     
-    def talk
+    def followers
+        @followers = @user.followers.page(params[:page])
+    end
+    
+    def receive_talk
         # send_ids = current_user.messages.where(receive_user_id: @user.id).pluck(:id)
         # receive_ids = @user.messages.where(receive_user_id: current_user.id).pluck(:id)
         
-        @messages = current_user.reverces_of_message.order(created_at: :desc)
+        @receive_messages = current_user.reverces_of_message.order(created_at: :desc).page(params[:page]).per(50)
+    end
+    
+    def user_talk
+        @user_messages = current_user.messages.order(created_at: :desc).page(params[:page]).per(50)
     end
     
     private

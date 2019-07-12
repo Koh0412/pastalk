@@ -15,11 +15,13 @@ Rails.application.routes.draw do
     collection do
       resources :tags, only: [:new, :create, :edit, :update, :destroy,]
       get :search
-      get :talk
+      get :receive_talk
+      get :user_talk
     end
     member do
       resources :messages, only: [:index, :create, :destroy]
       get :followings
+      get :followers
     end
   end
   

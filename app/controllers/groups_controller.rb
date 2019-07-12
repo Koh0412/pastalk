@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
     
     def index
     #   @users = User.all.page(params[:page])
-        @groups = current_user.connectings.page(params[:page])
+        @groups = Group.order(id: :desc).page(params[:page])
     end
     
     def show
