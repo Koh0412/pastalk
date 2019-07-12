@@ -17,6 +17,12 @@ class User < ApplicationRecord
     has_many :groupmessages
     has_many :user_messages, through: :groupmessages, source: :group
     
+    # DM
+    has_many :messages
+    has_many :sent_messages, through: :messages, source: :receive_user
+    has_many :reverces_of_message, class_name: 'Message', foreign_key: 'receive_user_id'
+    has_many :received_messages, through: :reverces_of_message, source: :user
+    
     # フォロー
     has_many :relationships, dependent: :destroy
     has_many :followings, through: :relationships, source: :follow

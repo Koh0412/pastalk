@@ -15,6 +15,9 @@ class GroupmessagesController < ApplicationController
   end
 
   def destroy
+    @group_message = current_user.groupmessages.find_by(id: params[:id])
+    @group_message.destroy
+    redirect_back(fallback_location: groups_url)
   end
   
   private
@@ -22,4 +25,5 @@ class GroupmessagesController < ApplicationController
   def groupmessage_params
     params.require(:groupmessage).permit(:body, :group_id)
   end
+
 end

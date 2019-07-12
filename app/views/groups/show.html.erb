@@ -35,7 +35,7 @@
             <% if msg.user == current_user %>
                 <div class="d-flex justify-content-end align-items-end pr-1 mt-2">
                     <div class="comment-color pr-1"><%= msg.created_at.strftime("%H:%M ") %></div>
-                    <div class="current-user-chat text-right"><%= msg.body %></div>
+                    <div class="current-user-chat text-right"><%= link_to msg.body, groupmessage_path(msg), method: :delete, data: { confirm: '削除しますか?' }%></div>
                 </div>
             <% else %>
                 <div class="py-1 pl-1"><%= msg.user.name %></div>

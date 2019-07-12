@@ -60,6 +60,13 @@ class UsersController < ApplicationController
         @followings = @user.followings.page(params[:page])
     end
     
+    def talk
+        # send_ids = current_user.messages.where(receive_user_id: @user.id).pluck(:id)
+        # receive_ids = @user.messages.where(receive_user_id: current_user.id).pluck(:id)
+        
+        @messages = current_user.reverces_of_message.order(created_at: :desc)
+    end
+    
     private
     
     def set_user

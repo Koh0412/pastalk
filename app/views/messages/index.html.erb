@@ -1,0 +1,23 @@
+<h2 class="text-center text-purple border-bottom py-2">メッセージ</h2>
+
+<% user = User.find_by(id: @message.receive_user_id) %>
+<% @messages.each do |message| %>
+    <div>
+        <div class="media-left">
+            <img class="media-object img-circle" src="<%= gravatar_url(message.user, { size: 50 }) %>" alt="">
+        </div>
+        <div class="media-body border-bottom mb-2">
+            <div>
+                <%= link_to message.user.name, user_path(message.user) %> <span class="text-muted"><%= message.created_at.strftime("%H:%M ") %></span>
+            </div>
+            <div>
+                <div><%= message.content %></div>
+                <% if current_user == message.user %>
+                    <%= link_to "削除", message_path(current_user, message), method: :delete, data: { confirm: "Y削除しますか？?" }, class: 'btn btn-danger btn-xs' %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<% end %>
+
+<%= render 'messages/form', message: @message %>
