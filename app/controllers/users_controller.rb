@@ -84,7 +84,7 @@ class UsersController < ApplicationController
     def correct_user
         set_user
         unless @user == current_user
-            redirect_back(fallback_location: root_path)
+            redirect_back(fallback_location: user_path(current_user))
         end
     end
     
