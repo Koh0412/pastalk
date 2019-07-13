@@ -1,19 +1,26 @@
 <% if users.any? %>
     <ul class="list-unstyled pt-2">
         <% users.each do |user| %>
-            <a href="<%= user_path(user) %>">
-                <li class="media border-bottom user-list py-2">
-                    <img class="mr-2 rounded-circle" src="<%= gravatar_url(user, { size: 50 }) %>" alt="">
-                    <div class="media-body">
-                        <div>
-                            <%= user.name %>
+                <li class="media border-bottom user-list py-2 d-flex justify-content-between align-items-center">
+                    <a href="<%= user_path(user) %>">
+                        <div class="media">
+                            <img class="mr-2 rounded-circle" src="<%= gravatar_url(user, { size: 50 }) %>" alt="">
+                            <div class="media-body">
+                                <div>
+                                    <%= user.name %>
+                                </div>
+                                <div class="comment-color">
+                                    <%= user.comment %>
+                                </div>
+                            </div>
                         </div>
-                        <div class="comment-color">
-                            <%= user.comment %>
-                        </div>
+                    </a>
+                    <div>
+                        <% unless current_user == user %>
+                            <%= render 'relationships/follow_btn', user: user %>
+                        <% end %>
                     </div>
                 </li>
-            </a>
         <% end %>
     </ul>
     <%= paginate users %>
