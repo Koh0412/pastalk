@@ -1,0 +1,24 @@
+<h2 class="text-center text-purple border-bottom py-3">タグでユーザーの検索</h2>
+<a href="/users/search" class="text-purple"><%= fa_icon 'arrow-left ' %> 戻る</a>
+
+<div class="row mt-2">
+    <div class="col-md-8 offset-md-2">
+        <%= form_with(url: tag_search_users_path, method: :get, class: 'd-flex justify-content-center', local: true) do |f| %>
+            <div class="input-group">
+                <%= f.text_field :tag_search, class: 'form-control not-rounded rounded-left', placeholder: 'タグでユーザー名を検索...' %>
+                <span class="input-group-btn">
+                    <%= f.submit '検索', name: nil, class: 'btn btn-success not-rounded rounded-right' %>
+                </span>
+            </div>
+        <% end %>
+        <% if @tags.blank? %>
+            <p class="border-top mt-2 pt-2 text-center comment-color">現在検索中のユーザーはいません タグでユーザーを検索してみましょう</p>
+        <% else %>
+            <ul class="p-2 my-2 border rounded">
+                <% if @tags.present? %>
+                    <%= render 'tag_search' %>
+                <% end %>
+            </ul>
+        <% end %>
+    </div>
+</div>

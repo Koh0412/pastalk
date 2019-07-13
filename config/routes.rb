@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     collection do
       resources :tags, only: [:new, :create, :edit, :update, :destroy,]
       get :search
+      get :tag_search
       get :receive_talk
       get :user_talk
     end

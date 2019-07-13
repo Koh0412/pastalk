@@ -56,6 +56,16 @@ class UsersController < ApplicationController
         end
     end
     
+    def tag_search
+        @tags = if !params[:tag_search].blank?
+            User.tag_search(params[:tag_search]).page(params[:page]).per(20).group_by { |key, val| key.user }
+        else
+            User.tag_search(params[:tag_search])
+        end
+        
+        # @tag_group = @tags.group_by { |key, val| key.user.name }
+    end
+    
     def followings
         @followings = @user.followings.page(params[:page])
     end

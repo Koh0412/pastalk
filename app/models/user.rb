@@ -38,6 +38,12 @@ class User < ApplicationRecord
         end
     end
     
+    def self.tag_search(tag_search)
+        if !tag_search.blank?
+            Tag.where(['name LIKE ?', "%#{tag_search}%"])
+        end
+    end
+    
     # follow
     def follow(other_user)
         unless self == other_user
